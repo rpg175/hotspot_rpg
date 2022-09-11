@@ -1,0 +1,9 @@
+openjdk/*.pem
+openjdk/*.idea/*
+openjdk/bin/
+openjdk/pkg/
+openjdk/.vscode/*
+
+openjdk/tool/javaCmd
+openjdk/*.idea/*
+
