@@ -232,7 +232,7 @@ JLI_Launch(int argc, char ** argv,              /* main argc, argc */
      *     bugid 5030265 below.)
      */
     SelectVersion(argc, argv, &main_class);
-
+    //创建执行环境
     CreateExecutionEnvironment(&argc, &argv,
                                jrepath, sizeof(jrepath),
                                jvmpath, sizeof(jvmpath),
@@ -244,7 +244,7 @@ JLI_Launch(int argc, char ** argv,              /* main argc, argc */
     if (JLI_IsTraceLauncher()) {
         start = CounterGet();
     }
-
+    //加载JVM
     if (!LoadJavaVM(jvmpath, &ifn)) {
         return(6);
     }
@@ -277,6 +277,7 @@ JLI_Launch(int argc, char ** argv,              /* main argc, argc */
     /* Parse command line options; if the return value of
      * ParseArguments is false, the program should exit.
      */
+    //解析命令行参数
     if (!ParseArguments(&argc, &argv, &mode, &what, &ret, jrepath))
     {
         return(ret);
@@ -295,7 +296,7 @@ JLI_Launch(int argc, char ** argv,              /* main argc, argc */
 
     /* set the -Dsun.java.launcher.* platform properties */
     SetJavaLauncherPlatformProps();
-
+    //启动JVM
     return JVMInit(&ifn, threadStackSize, argc, argv, mode, what, ret);
 }
 /*
