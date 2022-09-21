@@ -94,6 +94,10 @@ jint init_globals() {
   HandleMark hm;
   management_init();
   bytecodes_init();
+  //初始化类加载起
+  // 1.加载zip，so
+  // 2.解析前放设置classpath中的jar文件，遍历并创建为ClassPathEntry
+  // 3.添加到classloader下的last_entry
   classLoader_init();
   codeCache_init();
   VM_Version_init();
