@@ -99,6 +99,7 @@ jint init_globals() {
   // 2.解析前放设置classpath中的jar文件，遍历并创建为ClassPathEntry
   // 3.添加到classloader下的last_entry
   classLoader_init();
+  //编译后的代码缓存
   codeCache_init();
   VM_Version_init();
   os_init_globals();
