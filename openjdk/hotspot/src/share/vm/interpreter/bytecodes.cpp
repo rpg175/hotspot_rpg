@@ -164,7 +164,8 @@ void Bytecodes::def(Code code, const char* name, const char* format, const char*
   def(code, name, format, wide_format, result_type, depth, can_trap, code);
 }
 
-
+//format，这个属性表达2个意思:1表达字节码的格式，2表示字节码的长度。
+// b：表示字节码是1个字节长度，格式是：非可变长度
 void Bytecodes::def(Code code, const char* name, const char* format, const char* wide_format, BasicType result_type, int depth, bool can_trap, Code java_code) {
   assert(wide_format == NULL || format != NULL, "short form must exist if there's a wide form");
   int len  = (format      != NULL ? (int) strlen(format)      : 0);
