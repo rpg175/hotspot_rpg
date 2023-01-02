@@ -368,6 +368,9 @@ JavaMain(void * _args)
 
     /* Initialize the virtual machine */
     start = CounterGet();
+    //InitializeJVM()函数初始化JVM，给JavaVM和JNIEnv对象正确赋值
+    //通过调用InvocationFunctions结构体下的CreateJavaVM()函数指针来实现,该指针在LoadJavaVM()函数中指向libjvm.so动态链接库中的JNI_CreateJavaVM()函数
+    //当JNI_CreateJavaVM()函数执行成功，表示JVM启动
     if (!InitializeJVM(&vm, &env, &ifn)) {
         JLI_ReportErrorMessage(JVM_ERROR1);
         exit(1);
@@ -436,6 +439,7 @@ JavaMain(void * _args)
      * This method also correctly handles launching existing JavaFX
      * applications that may or may not have a Main-Class manifest entry.
      */
+    // 加载JavaMainClass（Java主类）
     mainClass = LoadMainClass(env, mode, what);
     CHECK_EXCEPTION_NULL_LEAVE(mainClass);
     /*
@@ -460,6 +464,7 @@ JavaMain(void * _args)
      * is not required. The main method is invoked here so that extraneous java
      * stacks are not in the application stack trace.
      */
+    // 在JavaMainClass中查找main()方法唯一ID
     mainID = (*env)->GetStaticMethodID(env, mainClass, "main",
                                        "([Ljava/lang/String;)V");
     CHECK_EXCEPTION_NULL_LEAVE(mainID);

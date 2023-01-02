@@ -3,7 +3,7 @@ openjdk/*.idea/*
 openjdk/bin/
 openjdk/pkg/
 openjdk/.vscode/*
-
+*/*.idea/*
 openjdk/tool/javaCmd
 openjdk/*.idea/*
 
