@@ -1229,15 +1229,17 @@ LoadMainClass(JNIEnv *env, int mode, char *name)
     jstring str;
     jobject result;
     jlong start, end;
+    //加载库函数LauncherHelper
     jclass cls = GetLauncherHelperClass(env);
     NULL_CHECK0(cls);
     if (JLI_IsTraceLauncher()) {
         start = CounterGet();
     }
+    //调用sun.launcher.LauncherHelper.java::checkAndLoadMain加载并校验主类
     NULL_CHECK0(mid = (*env)->GetStaticMethodID(env, cls,
                 "checkAndLoadMain",
                 "(ZILjava/lang/String;)Ljava/lang/Class;"));
-
+    //Returns a new Java string object for the specified platform string.
     str = NewPlatformString(env, name);
     result = (*env)->CallStaticObjectMethod(env, cls, mid, USE_STDERR, mode, str);
 
