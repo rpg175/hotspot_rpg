@@ -1240,6 +1240,7 @@ LoadMainClass(JNIEnv *env, int mode, char *name)
                 "checkAndLoadMain",
                 "(ZILjava/lang/String;)Ljava/lang/Class;"));
     //Returns a new Java string object for the specified platform string.
+    //先将char字符数组转换为java字符串
     str = NewPlatformString(env, name);
     result = (*env)->CallStaticObjectMethod(env, cls, mid, USE_STDERR, mode, str);
 
