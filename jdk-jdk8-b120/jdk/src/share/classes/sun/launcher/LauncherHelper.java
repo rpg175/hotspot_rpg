@@ -89,6 +89,7 @@ public enum LauncherHelper {
                 ResourceBundle.getBundle(defaultBundleName);
     }
     private static PrintStream ostream;
+    //三层类加载模型
     private static final ClassLoader scloader = ClassLoader.getSystemClassLoader();
     private static Class<?> appClass; // application class, for GUI/reporting purposes
 
