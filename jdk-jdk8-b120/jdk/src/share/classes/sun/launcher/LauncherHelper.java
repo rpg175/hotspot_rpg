@@ -478,6 +478,7 @@ public enum LauncherHelper {
                                             String what) {
         initOutput(printToStderr);
         // get the class name
+        // 使用java命令启动的时候，可以是具体单个.class,也可以是jar（多个class打包的jar文件）
         String cn = null;
         switch (mode) {
             case LM_CLASS:
