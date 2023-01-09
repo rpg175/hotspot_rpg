@@ -3309,15 +3309,19 @@ jint Threads::create_vm(JavaVMInitArgs* args, bool* canTryAgain) {
   if (!is_supported_jni_version(args->version)) return JNI_EVERSION;
 
   // Initialize the output stream module
+  // 初始化输出流模块
   ostream_init();
 
   // Process java launcher properties.
+  // 初始化启动器属性
   Arguments::process_sun_java_launcher_properties(args);
 
   // Initialize the os module before using TLS
+  // 初始化OS模块
   os::init();
 
   // Initialize system properties.
+  // 初始化系统属性
   Arguments::init_system_properties();
 
   // So that JDK version can be used as a discrimintor when parsing arguments
@@ -3327,6 +3331,7 @@ jint Threads::create_vm(JavaVMInitArgs* args, bool* canTryAgain) {
   Arguments::init_version_specific_system_properties();
 
   // Parse arguments
+  // 程序参数解释
   jint parse_result = Arguments::parse(args);
   if (parse_result != JNI_OK) return parse_result;
 
