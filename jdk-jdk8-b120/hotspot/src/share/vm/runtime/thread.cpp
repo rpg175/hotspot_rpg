@@ -3335,6 +3335,7 @@ jint Threads::create_vm(JavaVMInitArgs* args, bool* canTryAgain) {
   jint parse_result = Arguments::parse(args);
   if (parse_result != JNI_OK) return parse_result;
 
+  //初始化大页
   os::init_before_ergo();
 
   jint ergo_result = Arguments::apply_ergo();
@@ -3358,6 +3359,7 @@ jint Threads::create_vm(JavaVMInitArgs* args, bool* canTryAgain) {
   TraceTime timer("Create VM", TraceStartupTime);
 
   // Initialize the os module after parsing the args
+  // polling page 分配一个4kb的页
   jint os_init_2_result = os::init_2();
   if (os_init_2_result != JNI_OK) return os_init_2_result;
 
