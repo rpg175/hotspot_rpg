@@ -3359,7 +3359,7 @@ jint Threads::create_vm(JavaVMInitArgs* args, bool* canTryAgain) {
   TraceTime timer("Create VM", TraceStartupTime);
 
   // Initialize the os module after parsing the args
-  // polling page 分配一个4kb的页
+  // polling page 分配一个4kb的页，polling page的作用
   jint os_init_2_result = os::init_2();
   if (os_init_2_result != JNI_OK) return os_init_2_result;
 
@@ -3394,6 +3394,7 @@ jint Threads::create_vm(JavaVMInitArgs* args, bool* canTryAgain) {
   _number_of_non_daemon_threads = 0;
 
   // Initialize global data structures and create system classes in heap
+  //初始化系统模块
   vm_init_globals();
 
   // Attach the main thread to this os thread
