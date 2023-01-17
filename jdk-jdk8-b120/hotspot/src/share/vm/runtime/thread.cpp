@@ -3420,15 +3420,19 @@ jint Threads::create_vm(JavaVMInitArgs* args, bool* canTryAgain) {
 
   // Enable guard page *after* os::create_main_thread(), otherwise it would
   // crash Linux VM, see notes in os_linux.cpp.
+  // 编译栈溢出，警示页
   main_thread->create_stack_guard_pages();
 
   // Initialize Java-Level synchronization subsystem
+  // java监视系统，支撑了所以sync的实现，_EntryList电梯算法
   ObjectMonitor::Initialize() ;
 
   // Second phase of bootstrapping, VM is about entering multi-thread mode
+  //内存追踪器，抓取jvm用的内存大小及区间数据
   MemTracker::bootstrap_multi_thread();
 
   // Initialize global modules
+  // 全局模块,列如：jmx
   jint status = init_globals();
   if (status != JNI_OK) {
     delete main_thread;
