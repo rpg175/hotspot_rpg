@@ -246,6 +246,7 @@ void os::Bsd::initialize_system_info() {
   julong mem_val;
 
   /* get processors count via hw.ncpus sysctl */
+  //设置CPU的数量
   mib[0] = CTL_HW;
   mib[1] = HW_NCPU;
   len = sizeof(cpu_val);
@@ -271,7 +272,7 @@ void os::Bsd::initialize_system_info() {
 #else
   #error No ways to get physmem
 #endif
-
+  //计算物理内存
   len = sizeof(mem_val);
   if (sysctl(mib, 2, &mem_val, &len, NULL, 0) != -1) {
        assert(len == sizeof(mem_val), "unexpected data size");
