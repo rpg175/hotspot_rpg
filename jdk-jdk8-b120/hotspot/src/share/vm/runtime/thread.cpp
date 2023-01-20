@@ -3313,7 +3313,7 @@ jint Threads::create_vm(JavaVMInitArgs* args, bool* canTryAgain) {
   ostream_init();
 
   // Process java launcher properties.
-  // 初始化启动器属性
+  // 初始化启动器属性:设置Jvm的参数和系统参数，在java中调用的System.getProperty方法的所有参数值都在此方法中设置。
   Arguments::process_sun_java_launcher_properties(args);
 
   // Initialize the os module before using TLS
