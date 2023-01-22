@@ -168,6 +168,7 @@ jobject fillI18nProps(JNIEnv *env, jobject props, char *baseKey,
 JNIEXPORT jobject JNICALL
 Java_java_lang_System_initProperties(JNIEnv *env, jclass cla, jobject props)
 {
+    //把libjvm的属性值复制到java的props对象中
     char buf[128];
     java_props_t *sprops = GetJavaProperties(env);
     jmethodID putID = (*env)->GetMethodID(env,
