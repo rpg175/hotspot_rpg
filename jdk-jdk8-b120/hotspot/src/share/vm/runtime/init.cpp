@@ -89,7 +89,7 @@ void vm_init_globals() {
   perfMemory_init();
 }
 
-
+//全局模块初始化
 jint init_globals() {
   HandleMark hm;
   management_init();
@@ -139,7 +139,6 @@ jint init_globals() {
 
   return JNI_OK;
 }
-
 
 void exit_globals() {
   static bool destructorsCalled = false;

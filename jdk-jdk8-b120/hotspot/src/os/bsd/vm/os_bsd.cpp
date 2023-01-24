@@ -3605,6 +3605,7 @@ extern "C" {
 jint os::init_2(void)
 {
   // Allocate a single page and mark it as readable for safepoint polling
+  // polling page 线程安全点的实现
   address polling_page = (address) ::mmap(NULL, Bsd::page_size(), PROT_READ, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0);
   guarantee( polling_page != MAP_FAILED, "os::init_2: failed to allocate polling page" );
 
