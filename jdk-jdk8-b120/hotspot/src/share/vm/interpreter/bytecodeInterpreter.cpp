@@ -503,11 +503,10 @@ BytecodeInterpreter::run(interpreterState istate) {
 #endif
 
   static volatile jbyte* _byte_map_base; // adjusted card table base for oop store barrier
-
-  register intptr_t*        topOfStack = (intptr_t *)istate->stack(); /* access with STACK macros */
+  register intptr_t*        topOfStack = (intptr_t *)istate->stack(); /* access with STACK macros */   // 栈
   register address          pc = istate->bcp();
   register jubyte opcode;
-  register intptr_t*        locals = istate->locals();
+  register intptr_t*        locals = istate->locals(); // 寄存器
   register ConstantPoolCache*    cp = istate->constants(); // method()->constants()->cache()
 #ifdef LOTS_OF_REGS
   register JavaThread*      THREAD = istate->thread();

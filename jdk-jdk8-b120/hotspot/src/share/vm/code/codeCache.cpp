@@ -558,22 +558,29 @@ void CodeCache::initialize() {
   // This was originally just a check of the alignment, causing failure, instead, round
   // the code cache to the page size.  In particular, Solaris is moving to a larger
   // default page size.
+  //按照系统的内存页大小对CodeCache的参数取整
+  //CodeCacheExpansionSize表示CodeCache扩展一次内存空间对应的内存大小，x86下默认值是2304k
   CodeCacheExpansionSize = round_to(CodeCacheExpansionSize, os::vm_page_size());
+  //InitialCodeCacheSize表示CodeCache的初始大小，x86 启用C2编译下，默认值是2304k
   InitialCodeCacheSize = round_to(InitialCodeCacheSize, os::vm_page_size());
+  //ReservedCodeCacheSize表示CodeCache的最大内存大小，x86 启用C2编译下，默认值是48M
   ReservedCodeCacheSize = round_to(ReservedCodeCacheSize, os::vm_page_size());
+  //完成heap属性的初始化
   if (!_heap->reserve(ReservedCodeCacheSize, InitialCodeCacheSize, CodeCacheSegmentSize)) {
     vm_exit_during_initialization("Could not reserve enough space for code cache");
   }
-
+ //将CodeHeap放入一个MemoryPool中管理起来
   MemoryService::add_code_heap_memory_pool(_heap);
 
   // Initialize ICache flush mechanism
   // This service is needed for os::register_code_area
+  //初始化用于刷新CPU指令缓存的Icache，即生成一段用于刷新指令缓存的汇编代码，此时因为heap属性已初始化完成，所以可以从CodeCache中分配Blob了
   icache_init();
 
   // Give OS a chance to register generated code area.
   // This is used on Windows 64 bit platforms to register
   // Structured Exception Handlers for our generated code.
+  // Windows上为CodeCache中的运行时生成的代码注册结构化异常处理（SEH）,主要是win64使用
   os::register_code_area(_heap->low_boundary(), _heap->high_boundary());
 }
 
