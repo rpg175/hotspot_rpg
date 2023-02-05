@@ -957,7 +957,6 @@ bool GenCollectorPolicy::should_try_older_generation_allocation(
 //
 // MarkSweepPolicy methods
 //
-
 void MarkSweepPolicy::initialize_alignments() {
   _space_alignment = _gen_alignment = (uintx)Generation::GenGrain;
   _heap_alignment = compute_heap_alignment();
